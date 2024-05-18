@@ -32,9 +32,8 @@
   "scripts": {
     "build": "tsup",
     "lint": "eslint .",
-    "test": "npm run test-nodejs && npm run test-edge",
-    "test-nodejs": "vitest",
-    "test-edge": "jest --env @edge-runtime/jest-environment",
+    "test": "vitest",
+    "test-edge": "vitest --environment edge-runtime",
     "typecheck": "tsc",
     "prepare": "simple-git-hooks"
   },
@@ -42,6 +41,7 @@
     "@antfu/eslint-config": "2.18.1",
     "@changesets/changelog-github": "0.5.0",
     "@changesets/cli": "2.27.2",
+    "@edge-runtime/vm": "3.2.0",
     "@tsconfig/node18": "18.2.4",
     "@tsconfig/strictest": "2.0.5",
     "esbuild-plugin-file-path-extensions": "2.1.0",

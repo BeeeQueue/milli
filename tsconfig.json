@@ -1,7 +1,27 @@
 {
-  "extends": "@vercel/style-guide/typescript",
+  "extends": ["@tsconfig/node18/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
   "compilerOptions": {
-    "target": "ES2019"
+    // Output
+    "noEmit": true,
+    "sourceMap": true,
+
+    // Modules
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+
+    // Lessen strictness
+    "importsNotUsedAsValues": "remove",
+    "noImplicitReturns": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "verbatimModuleSyntax": false,
+
+    // Extra types
+    "types": ["node", "@total-typescript/ts-reset"]
   },
-  "include": ["src/"]
+
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "copy.ts"]
 }

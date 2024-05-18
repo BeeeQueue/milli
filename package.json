@@ -1,10 +1,15 @@
 {
-  "name": "ms",
+  "name": "milli",
+  "type": "module",
   "version": "3.0.0-canary.1",
   "description": "Tiny millisecond conversion utility",
-  "repository": "vercel/ms",
+  "license": "MIT",
+  "repository": "BeeeQueue/milli",
+  "packageManager": "pnpm@9.1.1",
+  "engines": {
+    "node": ">=18"
+  },
   "main": "./dist/index.cjs",
-  "type": "module",
   "exports": {
     "types": "./dist/index.d.ts",
     "import": "./dist/index.mjs",
@@ -13,48 +18,37 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
-  "license": "MIT",
-  "engines": {
-    "node": ">=12.13"
-  },
   "files": [
     "dist"
   ],
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,json5,yaml,yml,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
     "test": "npm run test-nodejs && npm run test-edge",
     "test-nodejs": "jest --env node",
     "test-edge": "jest --env @edge-runtime/jest-environment",
-    "build": "scripts/build.js",
-    "prepublishOnly": "npm run build",
-    "eslint-check": "eslint --max-warnings=0 .",
-    "prettier-check": "prettier --check .",
-    "type-check": "tsc --noEmit",
-    "precommit": "lint-staged",
-    "prepare": "husky install"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
-  "prettier": "@vercel/style-guide/prettier",
-  "lint-staged": {
-    "*": [
-      "prettier --ignore-unknown --write"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --max-warnings=0 --fix"
-    ]
+    "typecheck": "tsc",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@edge-runtime/jest-environment": "1.1.0-beta.6",
-    "@types/jest": "27.0.1",
-    "@vercel/style-guide": "3.0.0",
-    "eslint": "8.12.0",
-    "husky": "7.0.2",
-    "jest": "27.1.1",
-    "lint-staged": "11.1.2",
-    "prettier": "2.6.2",
-    "ts-jest": "27.0.5",
-    "typescript": "4.6.3"
+    "@antfu/eslint-config": "2.18.1",
+    "@tsconfig/node18": "18.2.4",
+    "@tsconfig/strictest": "2.0.5",
+    "esbuild-plugin-file-path-extensions": "2.1.0",
+    "eslint": "8.57.0",
+    "lint-staged": "15.2.2",
+    "prettier": "3.2.5",
+    "simple-git-hooks": "2.11.1",
+    "tsup": "8.0.2",
+    "typescript": "5.4.5",
+    "vitest": "1.6.0"
   }
 }

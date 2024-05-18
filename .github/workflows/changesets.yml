@@ -8,6 +8,10 @@ on:
 
 name: changesets
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   changesets:
     name: create pr / publish
@@ -48,4 +52,4 @@ jobs:
           publish: pnpm release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}

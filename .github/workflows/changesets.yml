@@ -1,0 +1,51 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .changeset/**/*
+  workflow_dispatch:
+
+name: changesets
+
+jobs:
+  changesets:
+    name: create pr / publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - run: corepack enable
+
+      - name: find pnpm cache path
+        id: cache
+        run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.cache.outputs.path }}
+          key: v1-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            v1-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update release PR / Publish packages to `npm`
+        uses: changesets/action@v1
+        with:
+          title: Release
+          commit: Release new version
+          publish: pnpm release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}

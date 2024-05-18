@@ -52,5 +52,11 @@
     "tsup": "8.0.2",
     "typescript": "5.4.5",
     "vitest": "1.6.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@latest",
+      "hasown": "npm:@nolyfill/hasown@latest"
+    }
   }
 }

@@ -160,10 +160,6 @@ export function parse(str: string): number {
 export function parseStrict(value: StringValue): number {
   return parse(value);
 }
-
-// eslint-disable-next-line import/no-default-export
-export default msFn;
-
 /**
  * Short format for `ms`.
  */

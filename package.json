@@ -1,7 +1,7 @@
 {
   "name": "milli",
   "type": "module",
-  "version": "3.0.0-canary.1",
+  "version": "3.0.0-beta.0",
   "description": "Tiny millisecond conversion utility",
   "license": "MIT",
   "repository": "BeeeQueue/milli",

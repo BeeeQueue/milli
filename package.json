@@ -24,6 +24,7 @@
   },
   "sideEffects": false,
   "files": [
+    "CHANGELOG.md",
     "dist"
   ],
   "simple-git-hooks": {

@@ -31,7 +31,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "test": "vitest",
     "test-edge": "vitest --environment edge-runtime",
     "typecheck": "tsc",

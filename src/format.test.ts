@@ -156,7 +156,7 @@ describe('format(invalid inputs)', () => {
 
   it('should throw an error, when format(NaN)', () => {
     expect(() => {
-      format(NaN);
+      format(Number.NaN);
     }).toThrowError();
   });
 

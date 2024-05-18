@@ -1,4 +1,4 @@
-import ms from './index';
+import { ms } from "./index"
 
 describe('ms(string)', () => {
   it('should not throw an error', () => {
@@ -292,7 +292,7 @@ describe('ms(invalid inputs)', () => {
 
   it('should throw an error, when ms(NaN)', () => {
     expect(() => {
-      ms(NaN);
+      ms(Number.NaN);
     }).toThrowError();
   });
 

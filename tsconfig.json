@@ -19,9 +19,9 @@
     "verbatimModuleSyntax": false,
 
     // Extra types
-    "types": ["node", "@total-typescript/ts-reset"]
+    "types": ["vitest/globals"]
   },
 
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist", "copy.ts"]
+  "exclude": ["node_modules", "dist"]
 }

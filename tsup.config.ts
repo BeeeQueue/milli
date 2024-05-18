@@ -4,6 +4,7 @@ import { esbuildPluginFilePathExtensions } from "esbuild-plugin-file-path-extens
 export default defineConfig({
   entry: ["src/index.ts"],
 
+  dts: true,
   bundle: false,
   platform: "browser",
   target: "node18",

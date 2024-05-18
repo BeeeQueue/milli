@@ -33,7 +33,7 @@
     "build": "tsup",
     "lint": "eslint .",
     "test": "npm run test-nodejs && npm run test-edge",
-    "test-nodejs": "jest --env node",
+    "test-nodejs": "vitest",
     "test-edge": "jest --env @edge-runtime/jest-environment",
     "typecheck": "tsc",
     "prepare": "simple-git-hooks"

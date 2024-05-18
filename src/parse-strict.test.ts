@@ -177,7 +177,7 @@ describe('parseStrict(invalid inputs)', () => {
   it('should throw an error, when parseStrict(NaN)', () => {
     expect(() => {
       // @ts-expect-error - We expect this to throw.
-      parseStrict(NaN);
+      parseStrict(Number.NaN);
     }).toThrowError();
   });
 

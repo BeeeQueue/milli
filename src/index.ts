@@ -41,7 +41,7 @@ type Unit =
 
 type UnitAnyCase = Unit | Uppercase<Unit> | Lowercase<Unit>;
 
-export type StringValue =
+type StringValue =
   | `${number}`
   | `${number}${UnitAnyCase}`
   | `${number} ${UnitAnyCase}`;
@@ -60,9 +60,9 @@ interface Options {
  * @param options - Options for the conversion
  * @throws Error if `value` is not a non-empty string or a number
  */
-function msFn(value: StringValue, options?: Options): number;
-function msFn(value: number, options?: Options): string;
-function msFn(value: StringValue | number, options?: Options): number | string {
+function ms(value: StringValue, options?: Options): number;
+function ms(value: number, options?: Options): string;
+function ms(value: StringValue | number, options?: Options): number | string {
   try {
     if (typeof value === 'string') {
       return parse(value);
@@ -85,23 +85,23 @@ function msFn(value: StringValue | number, options?: Options): number | string {
  * @returns The parsed value in milliseconds, or `NaN` if the string can't be
  * parsed
  */
-export function parse(str: string): number {
+function parse(str: string): number {
   if (typeof str !== 'string' || str.length === 0 || str.length > 100) {
     throw new Error(
       'Value provided to ms.parse() must be a string with length between 1 and 99.',
     );
   }
   const match =
-    /^(?<value>-?(?:\d+)?\.?\d+) *(?<type>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+    /^(?<value>-?(?:\d+(?:\.\d+)?|\.\d+)) *(?<type>milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
       str,
     );
   // Named capture groups need to be manually typed today.
   // https://github.com/microsoft/TypeScript/issues/32098
   const groups = match?.groups as { value: string; type?: string } | undefined;
   if (!groups) {
-    return NaN;
+    return Number.NaN;
   }
-  const n = parseFloat(groups.value);
+  const n = Number.parseFloat(groups.value);
   const type = (groups.type || 'ms').toLowerCase() as Lowercase<Unit>;
   switch (type) {
     case 'years':
@@ -157,7 +157,7 @@ export function parse(str: string): number {
  * @returns The parsed value in milliseconds, or `NaN` if the string can't be
  * parsed
  */
-export function parseStrict(value: StringValue): number {
+function parseStrict(value: StringValue): number {
   return parse(value);
 }
 /**
@@ -207,9 +207,9 @@ function fmtLong(ms: number): StringValue {
  * @param options - Options for the conversion
  * @returns The formatted string
  */
-export function format(ms: number, options?: Options): string {
-  if (typeof ms !== 'number' || !isFinite(ms)) {
-    throw new Error('Value provided to ms.format() must be of type number.');
+function format(ms: number, options?: Options): string {
+  if (typeof ms !== 'number' || !Number.isFinite(ms)) {
+    throw new TypeError('Value provided to ms.format() must be of type number.');
   }
   return options?.long ? fmtLong(ms) : fmtShort(ms);
 }
@@ -235,4 +235,14 @@ function plural(
  */
 function isError(value: unknown): value is Error {
   return typeof value === 'object' && value !== null && 'message' in value;
+}
+
+
+export {
+  type StringValue,
+
+  ms,
+  parse,
+  parseStrict,
+  format,
 }

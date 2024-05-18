@@ -173,7 +173,7 @@ describe('parse(invalid inputs)', () => {
   it('should throw an error, when parse(NaN)', () => {
     expect(() => {
       // @ts-expect-error - We expect this to throw.
-      parse(NaN);
+      parse(Number.NaN);
     }).toThrowError();
   });
 

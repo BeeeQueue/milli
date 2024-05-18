@@ -11,6 +11,7 @@ name: changesets
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   changesets:
@@ -51,5 +52,6 @@ jobs:
           commit: Release new version
           publish: pnpm release
         env:
+          NPM_CONFIG_PROVENANCE: true
           NPM_TOKEN: ${{ secrets.NPM_WRITE_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}

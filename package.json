@@ -10,12 +10,17 @@
     "node": ">=18"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    }
   },
   "sideEffects": false,
   "files": [
@@ -35,7 +40,8 @@
     "test": "vitest",
     "test-edge": "vitest --environment edge-runtime",
     "typecheck": "tsc",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "release": "pnpm build && pnpm changeset publish"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.18.1",
@@ -48,6 +54,7 @@
     "eslint": "8.57.0",
     "lint-staged": "15.2.2",
     "prettier": "3.2.5",
+    "publint": "0.2.8",
     "simple-git-hooks": "2.11.1",
     "tsup": "8.0.2",
     "typescript": "5.4.5",
